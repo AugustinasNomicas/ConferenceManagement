@@ -35,6 +35,7 @@ namespace ConferenceManagement.Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSingleton<IConferenceRepository, ConferenceRepository>();
+            services.AddSingleton<ISpeakerRepository, SpeakerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

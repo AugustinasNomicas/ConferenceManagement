@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ConferenceManagement.Data;
 using ConferenceManagement.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -33,6 +35,10 @@ namespace ConferenceManagement.Web
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=ConferenceManagment;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<ConferenceDbContext>
+                (options => options.UseSqlServer(connection));
 
             services.AddSingleton<IConferenceRepository, ConferenceRepository>();
             services.AddSingleton<ISpeakerRepository, SpeakerRepository>();

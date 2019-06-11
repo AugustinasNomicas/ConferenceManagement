@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace ConferenceManagement.Data.Entities
 {
     public class Speaker
     {
+        [Key]
         public int IdSpeaker { get; set; }
 
         public string FirstName { get; set; }

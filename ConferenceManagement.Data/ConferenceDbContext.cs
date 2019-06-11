@@ -12,6 +12,7 @@ namespace ConferenceManagement.Data
     {
         public DbSet<Speaker> Speakers { get; set; }
         public DbSet<Conference> Conferences { get; set; }
+        public DbSet<MyAgenda> MyAgenda { get; set; }
 
         public ConferenceDbContext(DbContextOptions<ConferenceDbContext> options) : base(options)
         {

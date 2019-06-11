@@ -48,6 +48,7 @@ namespace ConferenceManagement.Web
 
             services.AddScoped<IConferenceRepository, ConferenceRepository>();
             services.AddScoped<ISpeakerRepository, SpeakerRepository>();
+            services.AddScoped<IMyAgendaRepository, MyAgendaRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -8,52 +8,43 @@ namespace ConferenceManagement.Data.Repositories
 {
     public class ConferenceRepository : IConferenceRepository
     {
-        private readonly List<Conference> _conferencesInMemoryDb = new List<Conference>();
+        private readonly ConferenceDbContext _conferenceDbContext;
 
-        public ConferenceRepository()
+        public ConferenceRepository(ConferenceDbContext conferenceDbContext)
         {
-            Add(new Conference
-            {
-                Name = "BuildStuff",
-                Description = "Conference for IT Geeks"
-            });
-
-            Add(new Conference
-            {
-                Name = "Login",
-                Description = "Media / tech conference"
-            });
+            _conferenceDbContext = conferenceDbContext;
         }
 
         public int Add(Conference entity)
         {
-            if (entity.IdConference == 0)
-            {
-                entity.IdConference = _conferencesInMemoryDb.Count + 1;
-            }
+            _conferenceDbContext.Conferences.Add(entity);
 
-            _conferencesInMemoryDb.Add(entity);
+            _conferenceDbContext.SaveChanges();
 
             return entity.IdConference;
         }
 
         public void Delete(int id)
         {
-            _conferencesInMemoryDb.RemoveAt(id - 1);
+            var conf = GetBy(id);
+            _conferenceDbContext.Conferences.Remove(conf);
+            _conferenceDbContext.SaveChanges();
         }
 
         public IEnumerable<Conference> Get()
         {
-            return _conferencesInMemoryDb;
+            return _conferenceDbContext.Conferences ?? Enumerable.Empty<Conference>();
         }
 
         public Conference GetBy(int id)
         {
-            return _conferencesInMemoryDb.Single(c => c.IdConference == id);
+            return _conferenceDbContext.Conferences.Single(c => c.IdConference == id);
         }
 
         public void Update(Conference entity)
         {
+            _conferenceDbContext.Conferences.Update(entity);
+            _conferenceDbContext.SaveChanges();
         }
     }
 }

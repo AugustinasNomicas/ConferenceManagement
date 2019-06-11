@@ -44,7 +44,12 @@ namespace ConferenceManagement.Web.Controllers
                 return RedirectToAction("Index", "Speaker");
             }
 
-            return View();
+            if (speakerViewModel.Conferences == null)
+            {
+                speakerViewModel.Conferences = _conferences.Select(Map).ToList();
+            }
+
+            return View(speakerViewModel);
         }
 
         // GET: Speaker/Edit/5
@@ -94,7 +99,7 @@ namespace ConferenceManagement.Web.Controllers
                 LastName = speaker.LastName,
                 SpeechDateTime = speaker.SpeechDateTime,
                 SpeechName = speaker.SpeechName,
-                Conferences = conferences.Select(c => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Value = c.IdConference.ToString(), Text = c.Name }).ToList(),
+                Conferences = conferences.Select(Map).ToList(),
                 ConferenceName = conferences.FirstOrDefault(c => c.IdConference == speaker.IdConference).Name
             };
 
@@ -108,5 +113,8 @@ namespace ConferenceManagement.Web.Controllers
                 SpeechDateTime = speaker.SpeechDateTime,
                 SpeechName = speaker.SpeechName,
             };
+
+        private Microsoft.AspNetCore.Mvc.Rendering.SelectListItem Map(Conference c) =>
+            new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Value = c.IdConference.ToString(), Text = c.Name };
     }
 }

@@ -40,8 +40,8 @@ namespace ConferenceManagement.Web
             services.AddDbContext<ConferenceDbContext>
                 (options => options.UseSqlServer(connection));
 
-            services.AddSingleton<IConferenceRepository, ConferenceRepository>();
-            services.AddSingleton<ISpeakerRepository, SpeakerRepository>();
+            services.AddScoped<IConferenceRepository, ConferenceRepository>();
+            services.AddScoped<ISpeakerRepository, SpeakerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Profiling;
 
 namespace ConferenceManagement.Web
 {
@@ -34,7 +35,7 @@ namespace ConferenceManagement.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.AddMiniProfiler().AddEntityFramework();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             var connection = @"Server=(localdb)\mssqllocaldb;Database=ConferenceManagment;Trusted_Connection=True;ConnectRetryCount=0";
@@ -63,10 +64,13 @@ namespace ConferenceManagement.Web
                 app.UseExceptionHandler("/Home/Error");
             }
 
+
             app.UseStaticFiles();
             app.UseCookiePolicy();
-            app.UseAuthentication();
 
+            app.UseMiniProfiler();
+            app.UseAuthentication();
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

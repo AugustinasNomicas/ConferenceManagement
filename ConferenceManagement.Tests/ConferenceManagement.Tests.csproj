@@ -23,8 +23,4 @@
     <ProjectReference Include="..\ConferenceManagement.Web\ConferenceManagement.Web.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="IntegrationTests\Controllers\" />
-  </ItemGroup>
-
 </Project>

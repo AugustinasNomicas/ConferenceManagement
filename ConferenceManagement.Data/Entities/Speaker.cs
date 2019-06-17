@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace ConferenceManagement.Data.Entities
@@ -18,5 +19,6 @@ namespace ConferenceManagement.Data.Entities
         public DateTime SpeechDateTime { get; set; }
 
         public int IdConference { get; set; }
+        public Conference Conference { get; set; }
     }
 }

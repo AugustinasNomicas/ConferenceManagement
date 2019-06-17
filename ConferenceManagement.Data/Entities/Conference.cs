@@ -13,6 +13,6 @@ namespace ConferenceManagement.Data.Entities
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public List<Speaker> Speakers { get; set; } = new List<Speaker>();
+        public List<Speaker> Speakers { get; set; }
     }
 }

@@ -100,7 +100,7 @@ namespace ConferenceManagement.Web.Controllers
                 SpeechDateTime = speaker.SpeechDateTime,
                 SpeechName = speaker.SpeechName,
                 Conferences = conferences.Select(Map).ToList(),
-                ConferenceName = conferences.FirstOrDefault(c => c.IdConference == speaker.IdConference).Name
+                ConferenceName = speaker.Conference.Name
             };
 
         private Speaker Map(SpeakerViewModel speaker) =>
